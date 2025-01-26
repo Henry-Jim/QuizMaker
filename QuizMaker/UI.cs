@@ -81,7 +81,7 @@ namespace QuizMaker
             int score = Constants.ININTIAL_SCORE;
             int totalQuestions = _quiz.GetQuestionCount();
 
-            for (int i = 0, i < totalQuestions; i++)
+            for (int i = 0; i < totalQuestions; i++)
             {
                 Question question = _quiz.GetRandomQuestion();
                 Console.WriteLine(question.Text);
@@ -92,7 +92,7 @@ namespace QuizMaker
                 }
 
                 Console.WriteLine("Enter the indices of the correct answers (use comma to separate multiple answers): ");
-                HashSet<int> userAnswers = new HashSet<int>(Console.ReadLine().Split(',').Select(x => int.Parse(x) - 1));
+                List<int> userAnswers = new List<int>(Console.ReadLine().Split(',').Select(x => int.Parse(x) - 1));
 
                 if (question.IsCorrect(userAnswers))
                 {

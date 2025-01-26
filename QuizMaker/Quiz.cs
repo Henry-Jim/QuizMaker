@@ -8,7 +8,8 @@ using System.IO;
 
 namespace QuizMaker
 {
-    internal class Quiz
+    [Serializable]
+    public class Quiz
     {
         public static readonly Random random = new Random();
 
@@ -51,6 +52,16 @@ namespace QuizMaker
             {
                 return (Quiz)serializer.Deserialize(reader);
             }
+        }
+
+        public void SaveToDefault()
+        {
+            SaveToFile(Constants.DEFAULT_FILE_PATH);
+        }
+
+        public static Quiz LoadFromDefault()
+        {
+            return LoadFromFile(Constants.DEFAULT_FILE_PATH);
         }
 
         public int GetQuestionCount()

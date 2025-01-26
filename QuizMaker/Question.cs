@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace QuizMaker
 {
     [Serializable]
-    internal class Question
+    public class Question
     {
         public string Text { get; set; }
         public List<string> Answers { get; set; }
+
+        [XmlIgnore]
         public HashSet<int> CorrectAnswerIndices { get; set; }
+
+        public List<int> CorrectIndicesList
+        {
+            get => new List<int>(CorrectAnswerIndices);
+            set => CorrectAnswerIndices = new HashSet<int>(value);
+        }
 
         public Question() // Default constructor
         {
