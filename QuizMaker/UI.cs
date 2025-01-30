@@ -92,7 +92,7 @@ namespace QuizMaker
                 }
 
                 Console.WriteLine("Enter the indices of the correct answers (use comma to separate multiple answers): ");
-                List<int> userAnswers = new List<int>(Console.ReadLine().Split(',').Select(x => int.Parse(x) - 1));
+                List<int> userAnswers = Console.ReadLine().Split(',').Select(int.Parse).ToList();
 
                 if (question.IsCorrect(userAnswers))
                 {
