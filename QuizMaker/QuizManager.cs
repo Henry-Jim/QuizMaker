@@ -9,13 +9,13 @@ using System.IO;
 namespace QuizMaker
 {
     [Serializable]
-    public class Quiz
+    public class QuizManager
     {
         public static readonly Random random = new Random();
 
         public List<Question> Questions { get; set; }
 
-        public Quiz()
+        public QuizManager()
         {
             Questions = new List<Question>();
         }
@@ -38,19 +38,19 @@ namespace QuizMaker
 
         public void SaveToFile(string path)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(Quiz));
+            XmlSerializer serializer = new XmlSerializer(typeof(QuizManager));
             using (StreamWriter write = new StreamWriter(path))
             {
                 serializer.Serialize(write, this);
             }
         }
 
-        public static Quiz LoadFromFile(string path)
+        public static QuizManager LoadFromFile(string path)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(Quiz));
+            XmlSerializer serializer = new XmlSerializer(typeof(QuizManager));
             using (StreamReader reader = new StreamReader(path))
             {
-                return (Quiz)serializer.Deserialize(reader);
+                return (QuizManager)serializer.Deserialize(reader);
             }
         }
 
@@ -59,7 +59,7 @@ namespace QuizMaker
             SaveToFile(Constants.DEFAULT_FILE_PATH);
         }
 
-        public static Quiz LoadFromDefault()
+        public static QuizManager LoadFromDefault()
         {
             return LoadFromFile(Constants.DEFAULT_FILE_PATH);
         }

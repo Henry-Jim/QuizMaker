@@ -8,14 +8,14 @@ namespace QuizMaker
 {
     internal class UI
     {
-        private Quiz _quiz;
+        private QuizManager _quiz;
 
-        public UI(Quiz quiz)
+        public UI(QuizManager quiz)
         {
             this._quiz = quiz;
         }
 
-        public void AddQuestions()
+        public void AddQuestions(QuizManager quiz)
         {
             Console.WriteLine("Enter your questions here. Type 'done' to finish.");
 
@@ -39,22 +39,22 @@ namespace QuizMaker
                 HashSet<int> correctAnswerIndices = new HashSet<int>(Console.ReadLine().Split(',').Select(int.Parse));
 
                 Question question = new Question(questionText, answers, correctAnswerIndices);
-                _quiz.AddQuestion(question);
+                quiz.AddQuestion(question);
             }
         }
 
-        public void RemoveQuestion()
+        public void RemoveQuestion(QuizManager quiz)
         {
-            if (_quiz.GetQuestionCount() == 0)
+            if (quiz.GetQuestionCount() == 0)
             {
                 Console.WriteLine("There are no questions to remove.");
                 return;
             }
 
             Console.WriteLine("Here are the current questions: ");
-            for (int i = 0; i < _quiz.GetQuestionCount(); i++)
+            for (int i = 0; i < quiz.GetQuestionCount(); i++)
             {
-                Console.WriteLine($"{i + 1}. {_quiz.Questions[i].Text}");
+                Console.WriteLine($"{i + 1}. {quiz.Questions[i].Text}");
             }
 
             Console.WriteLine("Enter the number(s) of the question(s). Use commas to separate: ");
@@ -62,9 +62,9 @@ namespace QuizMaker
 
             foreach (var index in indicesToRemove.OrderByDescending(i => i))
             {
-                if (index >= 0 && index < _quiz.GetQuestionCount())
+                if (index >= 0 && index < quiz.GetQuestionCount())
                 {
-                    _quiz.Questions.RemoveAt(index);
+                    quiz.Questions.RemoveAt(index);
                     Console.WriteLine($"Removed question #{index + 1}");
                 }
                 else
@@ -76,14 +76,14 @@ namespace QuizMaker
             Console.WriteLine("Questions updated successfully.");
         }
 
-        public void PlayQuiz()
+        public void PlayQuiz(QuizManager quiz)
         {
             int score = Constants.ININTIAL_SCORE;
-            int totalQuestions = _quiz.GetQuestionCount();
+            int totalQuestions = quiz.GetQuestionCount();
 
             for (int i = 0; i < totalQuestions; i++)
             {
-                Question question = _quiz.GetRandomQuestion();
+                Question question = quiz.GetRandomQuestion();
                 Console.WriteLine(question.Text);
 
                 for (int j = 0; j < question.Answers.Count; j++)

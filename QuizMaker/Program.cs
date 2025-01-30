@@ -6,7 +6,7 @@
         {
             Console.WriteLine("Welcome to Quiz Maker! ");
 
-            Quiz quiz = new Quiz();
+            QuizManager quiz = new QuizManager();
             UI ui = new UI(quiz);
 
             while (true)
@@ -30,7 +30,7 @@
                 {
                     case Constants.MODE_CREATE:
                         Console.WriteLine("Create a new quiz: ");
-                        ui.AddQuestions();
+                        ui.AddQuestions(quiz);
                         break;
 
                     case Constants.MODE_PLAY:
@@ -41,7 +41,7 @@
                         else
                         {
                             Console.WriteLine("Play the quiz: ");
-                            ui.PlayQuiz();
+                            ui.PlayQuiz(quiz);
                         }
                         break;
 
@@ -53,7 +53,7 @@
                         else
                         {
                             Console.WriteLine("Remove Questions: ");
-                            ui.RemoveQuestion();
+                            ui.RemoveQuestion(quiz);
                         }
                         break;
 
@@ -65,7 +65,7 @@
                     case Constants.MODE_LOAD: 
                         try
                         {
-                            quiz = Quiz.LoadFromDefault();
+                            quiz = QuizManager.LoadFromDefault();
                             ui = new UI(quiz);
                             Console.WriteLine($"Quiz loaded successfully from {Constants.DEFAULT_FILE_PATH}");
                         }
