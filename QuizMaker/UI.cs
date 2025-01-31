@@ -8,12 +8,6 @@ namespace QuizMaker
 {
     internal class UI
     {
-        private QuizManager _quiz;
-
-        public UI(QuizManager quiz)
-        {
-            this._quiz = quiz;
-        }
 
         public void AddQuestions(QuizManager quiz)
         {

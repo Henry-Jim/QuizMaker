@@ -7,7 +7,7 @@
             Console.WriteLine("Welcome to Quiz Maker! ");
 
             QuizManager quiz = new QuizManager();
-            UI ui = new UI(quiz);
+            UI ui = new UI();
 
             while (true)
             {
@@ -66,7 +66,6 @@
                         try
                         {
                             quiz = QuizManager.LoadFromDefault();
-                            ui = new UI(quiz);
                             Console.WriteLine($"Quiz loaded successfully from {Constants.DEFAULT_FILE_PATH}");
                         }
                         catch (Exception e)
