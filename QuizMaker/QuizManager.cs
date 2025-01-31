@@ -12,6 +12,7 @@ namespace QuizMaker
     public class QuizManager
     {
         public static readonly Random random = new Random();
+        private static readonly XmlSerializer _serializer = new XmlSerializer(typeof(QuizManager));
 
         public List<Question> Questions { get; set; }
 
@@ -38,19 +39,19 @@ namespace QuizMaker
 
         public void SaveToFile(string path)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(QuizManager));
+            
             using (StreamWriter write = new StreamWriter(path))
             {
-                serializer.Serialize(write, this);
+                _serializer.Serialize(write, this);
             }
         }
 
         public static QuizManager LoadFromFile(string path)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(QuizManager));
+            
             using (StreamReader reader = new StreamReader(path))
             {
-                return (QuizManager)serializer.Deserialize(reader);
+                return (QuizManager)_serializer.Deserialize(reader);
             }
         }
 
