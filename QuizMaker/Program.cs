@@ -11,22 +11,9 @@
 
             while (true)
             {
-                Console.WriteLine("\nMain Menu: ");
-                Console.WriteLine($"{Constants.MODE_CREATE}. Create a new quiz");
-                Console.WriteLine($"{Constants.MODE_PLAY}. Play an existing quiz");
-                Console.WriteLine($"{Constants.MODE_REMOVE_QUESTIONS}. Remove questions from a quiz");
-                Console.WriteLine($"{Constants.MODE_SAVE}. Save the current quiz");
-                Console.WriteLine($"{Constants.MODE_LOAD}. Load a saved quiz");
-                Console.WriteLine($"{Constants.MODE_EXIT}. Exit");
+                int choice = ui.ShowMainMenu();
 
-                Console.WriteLine("Choose an option");
-                if (!int.TryParse(Console.ReadLine(), out int choice))
-                {
-                    Console.WriteLine("Invalid choice. Please try again.");
-                    continue;
-                }
-
-                    switch (choice)
+                switch (choice)
                 {
                     case Constants.MODE_CREATE:
                         Console.WriteLine("Create a new quiz: ");

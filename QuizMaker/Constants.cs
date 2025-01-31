@@ -18,5 +18,7 @@ namespace QuizMaker
         public const int MODE_SAVE = 4;
         public const int MODE_LOAD = 5;
         public const int MODE_EXIT = 6;
+
+        public const string DONE_COMMAND = "done";
     }
 }

@@ -111,5 +111,26 @@ namespace QuizMaker
                 Console.WriteLine($"Your final score: {score}/{totalQuestions}");
             }
         }
+
+        public int ShowMainMenu()
+        {
+            Console.WriteLine("\nManin Menu: ");
+            Console.WriteLine($"{Constants.MODE_CREATE}. Create a new quiz");
+            Console.WriteLine($"{Constants.MODE_PLAY}. Play an existing quiz");
+            Console.WriteLine($"{Constants.MODE_REMOVE_QUESTIONS}. Remove questions from a quiz");
+            Console.WriteLine($"{Constants.MODE_SAVE}. Save the current quiz");
+            Console.WriteLine($"{Constants.MODE_LOAD}. Load a saved quiz");
+            Console.WriteLine($"{Constants.MODE_EXIT}. Exit");
+
+            Console.WriteLine("Choose an option");
+
+            if (int.TryParse(Console.ReadLine(), out int choice))
+            {
+                return choice;
+            }
+
+            Console.WriteLine("Invalid choice. Please try again.");
+            return -1;
+        }
     }
 }
