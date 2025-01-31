@@ -11,21 +11,21 @@ namespace QuizMaker
 
         public void AddQuestions(QuizManager quiz)
         {
-            Console.WriteLine("Enter your questions here. Type 'done' to finish.");
+            Console.WriteLine($"Enter your questions here. Type '{Constants.DONE_COMMAND}' to finish.");
 
             while (true)
             {
-                Console.WriteLine("Enter the question text (or type 'done' to finish): ");
+                Console.WriteLine($"Enter the question text (or type '{Constants.DONE_COMMAND}' to finish): ");
                 string questionText = Console.ReadLine();
-                if (questionText.ToLower() == "done") break;
+                if (questionText.ToLower() == Constants.DONE_COMMAND) break;
 
-                Console.WriteLine("Enter possible answers (or type 'done' to finish): ");
+                Console.WriteLine($"Enter possible answers (or type '{Constants.DONE_COMMAND}' to finish): ");
                 List<string> answers = new List<string>();
                 while (true)
                 {
                     Console.WriteLine("Ansers: ");
                     string answer = Console.ReadLine();
-                    if (answer.ToLower() == "done") break;
+                    if (answer.ToLower() == Constants.DONE_COMMAND) break;
                     answers.Add(answer);
                 }
 
