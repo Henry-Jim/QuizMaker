@@ -81,9 +81,16 @@ namespace QuizMaker
             int score = Constants.ININTIAL_SCORE;
             int totalQuestions = quiz.GetQuestionCount();
 
-            for (int i = 0; i < totalQuestions; i++)
+            if (totalQuestions == 0)
             {
-                Question question = quiz.GetRandomQuestion();
+                Console.WriteLine("No questions available to play.");
+                return;
+            }
+
+            List<Question> shuffledQuestions = quiz.Questions.OrderBy(q => QuizManager.random.Next()).ToList();
+
+            foreach (Question question in shuffledQuestions)
+            {
                 Console.WriteLine(question.Text);
 
                 for (int j = 0; j < question.Answers.Count; j++)
@@ -91,8 +98,11 @@ namespace QuizMaker
                     Console.WriteLine($"{j + 1}. {question.Answers[j]}");
                 }
 
-                Console.WriteLine("Enter the indices of the correct answers (use comma to separate multiple answers): ");
+                Console.WriteLine("Enter the indices of the correct answers (use commas to separate multiple answers, starting from 1): ");
                 List<int> userAnswers = Console.ReadLine().Split(',').Select(int.Parse).ToList();
+
+                Console.WriteLine($"Your answer: {string.Join(",", userAnswers)}");
+                Console.WriteLine($"Correct answer: {string.Join(",", question.CorrectAnswerIndices)}");
 
                 if (question.IsCorrect(userAnswers))
                 {
@@ -103,9 +113,9 @@ namespace QuizMaker
                 {
                     Console.WriteLine("Incorrect!");
                 }
-            }
 
-            Console.WriteLine($"Your score: {score}/{totalQuestions}");
+                Console.WriteLine($"Your final score: {score}/{totalQuestions}");
+            }
         }
     }
 }
