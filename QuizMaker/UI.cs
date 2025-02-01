@@ -15,22 +15,11 @@ namespace QuizMaker
 
             while (true)
             {
-                Console.WriteLine($"Enter the question text (or type '{Constants.DONE_COMMAND}' to finish): ");
-                string questionText = Console.ReadLine();
-                if (questionText.ToLower() == Constants.DONE_COMMAND) break;
+                string questionText = GetQuestionText();
+                if (questionText == null) break; // User typed 'done'
 
-                Console.WriteLine($"Enter possible answers (or type '{Constants.DONE_COMMAND}' to finish): ");
-                List<string> answers = new List<string>();
-                while (true)
-                {
-                    Console.WriteLine("Ansers: ");
-                    string answer = Console.ReadLine();
-                    if (answer.ToLower() == Constants.DONE_COMMAND) break;
-                    answers.Add(answer);
-                }
-
-                Console.WriteLine("Enter the index of correct answers (use comma to separate multiple answers): ");
-                HashSet<int> correctAnswerIndices = new HashSet<int>(Console.ReadLine().Split(',').Select(int.Parse));
+                List<string> answers = GetAnswerOptions();
+                HashSet<int> correctAnswerIndices = GetCorrectAnswers();
 
                 Question question = new Question(questionText, answers, correctAnswerIndices);
                 quiz.AddQuestion(question);
@@ -131,6 +120,53 @@ namespace QuizMaker
 
             Console.WriteLine("Invalid choice. Please try again.");
             return -1;
+        }
+
+        public string GetQuestionText()
+        {
+            Console.WriteLine($"Enter the question text (or type '{Constants.DONE_COMMAND}' to finish): ");
+            string questionText = Console.ReadLine();
+
+            if (questionText.ToLower() == Constants.DONE_COMMAND)
+            {
+                return null;
+            }
+
+            return questionText;
+        }
+
+        public List<string> GetAnswerOptions()
+        {
+            List<string> answers = new List<string>();
+            Console.WriteLine($"Enter possible answers (or type '{Constants.DONE_COMMAND}' to finish): ");
+
+            while(true)
+            {
+                Console.WriteLine("Answer: ");
+                string answer = Console.ReadLine();
+                if (answer.ToLower() == Constants.DONE_COMMAND) break;
+                answers.Add(answer);
+            }
+
+            return answers;
+        }
+
+        public HashSet<int> GetCorrectAnswers()
+        {
+            Console.WriteLine("Enter the index of correct answers (use commas to separate multiple answers, starting from 1): ");
+
+            while(true)
+            {
+                try
+                {
+                    HashSet<int> correctAnswerIndices = new HashSet<int>(Console.ReadLine().Split(',').Select(int.Parse));
+                    return correctAnswerIndices;
+                }
+                catch
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
+                }
+            }
         }
     }
 }
