@@ -8,7 +8,7 @@ using System.IO;
 
 namespace QuizMaker
 {
-    [Serializable]
+    
     public class QuizManager
     {
         public static readonly Random random = new Random();
