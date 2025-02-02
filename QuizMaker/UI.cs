@@ -9,21 +9,24 @@ namespace QuizMaker
     internal class UI
     {
 
-        public void AddQuestions(QuizManager quiz)
+        public List<Question> AddQuestions()
         {
             Console.WriteLine($"Enter your questions here. Type '{Constants.DONE_COMMAND}' to finish.");
+            List<Question> questions = new List<Question>();
 
             while (true)
             {
                 string questionText = GetQuestionText();
-                if (questionText == null) break; // User typed 'done'
+                if (questionText == null) break; // User entered'done'
 
                 List<string> answers = GetAnswerOptions();
                 HashSet<int> correctAnswerIndices = GetCorrectAnswers();
 
                 Question question = new Question(questionText, answers, correctAnswerIndices);
-                quiz.AddQuestion(question);
+                questions.Add(question);
             }
+
+            return questions;
         }
 
         public void RemoveQuestion(QuizManager quiz)

@@ -17,7 +17,18 @@
                 {
                     case Constants.MODE_CREATE:
                         Console.WriteLine("Create a new quiz: ");
-                        ui.AddQuestions(quiz);
+                        List<Question> newQuestions = ui.AddQuestions();
+
+                        if (newQuestions.Count > 0)
+                        {
+                            quiz.AddQuestions(newQuestions);
+                            quiz.SaveAll();
+                            Console.WriteLine("Questions added and saved successfully!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("No questions were added.");
+                        }
                         break;
 
                     case Constants.MODE_PLAY:

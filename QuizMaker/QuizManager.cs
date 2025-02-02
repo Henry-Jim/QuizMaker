@@ -69,5 +69,15 @@ namespace QuizMaker
         {
             return Questions.Count;
         }
+
+        public void AddQuestions(List<Question> questions)
+        {
+            Questions.AddRange(questions); // Add all questions at once
+        }
+
+        public void SaveAll()
+        {
+            SaveToDefault(); // Save the entire list instead of one-by-one
+        }
     }
 }
