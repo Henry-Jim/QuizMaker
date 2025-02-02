@@ -11,7 +11,8 @@
 
             while (true)
             {
-                int choice = ui.ShowMainMenu();
+                ui.ShowMainMenu();
+                int choice = ui.GetUserMenuChoice();
 
                 switch (choice)
                 {

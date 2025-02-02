@@ -104,7 +104,7 @@ namespace QuizMaker
             }
         }
 
-        public int ShowMainMenu()
+        public void ShowMainMenu()
         {
             Console.WriteLine("\nManin Menu: ");
             Console.WriteLine($"{Constants.MODE_CREATE}. Create a new quiz");
@@ -114,15 +114,6 @@ namespace QuizMaker
             Console.WriteLine($"{Constants.MODE_LOAD}. Load a saved quiz");
             Console.WriteLine($"{Constants.MODE_EXIT}. Exit");
 
-            Console.WriteLine("Choose an option");
-
-            if (int.TryParse(Console.ReadLine(), out int choice))
-            {
-                return choice;
-            }
-
-            Console.WriteLine("Invalid choice. Please try again.");
-            return -1;
         }
 
         public string GetQuestionText()
@@ -170,6 +161,18 @@ namespace QuizMaker
                     Console.WriteLine("Invalid input. Please try again.");
                 }
             }
+        }
+
+        public int GetUserMenuChoice()
+        {
+            Console.WriteLine("Choose an option: ");
+            if (int.TryParse(Console.ReadLine(), out int choice))
+            {
+                return choice;
+            }
+
+            Console.WriteLine("Invalid Choice. Please try again.");
+            return -1;
         }
     }
 }
